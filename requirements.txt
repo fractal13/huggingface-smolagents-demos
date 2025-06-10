@@ -1,0 +1,12 @@
+pip
+torch
+transformers
+smolagents[litellm]
+requests
+markdownify
+duckduckgo-search
+wikipedia
+pandas
+pillow
+accelerate
+num2words
