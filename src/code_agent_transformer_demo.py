@@ -17,12 +17,24 @@ additional_authorized_imports = []
 # HuggingFaceTB/SmolVLM2-2.2B-Instruct
 # model = TransformersModel(model_id="HuggingFaceTB/SmolVLM2-2.2B-Instruct", max_new_tokens=16384)
 
+# Too big for my GPU (~5.6GiB)
+# model_id = "llava-hf/llava-1.5-7b-hf"
+model_id = "Qwen/Qwen2.5-VL-3B-Instruct"
+
+# After the conversation grows, this model will also run out of memory.
+#model_id = "HuggingFaceTB/SmolVLM2-2.2B-Instruct"
+
+# This parameter helps to put off the memory issue, but not permanently.
+# torch_dtype=torch.float16
+
 import torch
 torch.cuda.empty_cache()
 
-model = TransformersModel(model_id="HuggingFaceTB/SmolVLM2-2.2B-Instruct", 
-                          torch_dtype=torch.float16,
-                          max_new_tokens=16384)
+# model = TransformersModel(model_id="HuggingFaceTB/SmolVLM2-2.2B-Instruct", 
+#                           torch_dtype=torch.float16,
+#                           max_new_tokens=16384)
+model = TransformersModel(model_id=model_id,
+                          torch_dtype=torch.float16)
 
 from smolagents import LogLevel
 agent = CodeAgent(

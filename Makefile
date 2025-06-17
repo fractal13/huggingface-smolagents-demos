@@ -1,6 +1,16 @@
 VENV := .virtual_environment
 
-all: install
+all: help
+
+help:
+	@echo
+	@echo "Targets:"
+	@echo "install                     - Install environment necessary to support this project."
+	@echo "install-deb                 - Install OS packages necessary to support this project. Assumes apt/dpkg package management system."
+	@echo "install-pip                 - Install Python pakcages necessary to suport this project."
+	@echo "code-agent-transformer-demo - Run the demo CodeAgent using a local transformers LLM."
+	@echo "code-agent-ollama-demo      - Run the demo CodeAgent using a local LLM using ollama."
+	@echo
 
 $(VENV):
 	python3 -m venv $(VENV)
@@ -19,6 +29,9 @@ install-pip: $(VENV)
 
 code-agent-transformer-demo:
 	. $(VENV)/bin/activate; src/code_agent_transformer_demo.py
+
+code-agent-transformer-special-demo:
+	. $(VENV)/bin/activate; src/code_agent_transformer_special_demo.py
 
 code-agent-ollama-demo:
 	. $(VENV)/bin/activate; src/code_agent_ollama_demo.py

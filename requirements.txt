@@ -2,6 +2,7 @@ pip
 torch
 transformers
 smolagents[litellm]
+smolagents[transformers]
 requests
 markdownify
 duckduckgo-search
@@ -10,3 +11,7 @@ pandas
 pillow
 accelerate
 num2words
+quanto
+bitsandbytes
+optimum-quanto
+
