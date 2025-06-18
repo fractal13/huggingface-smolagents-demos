@@ -36,3 +36,10 @@ code-agent-transformer-special-demo:
 code-agent-ollama-demo:
 	. $(VENV)/bin/activate; src/code_agent_ollama_demo.py
 
+code-agent-openai-demo:
+	. $(VENV)/bin/activate; src/code_agent_openai_demo.py
+
+code-agent-gemini-demo:
+	. $(VENV)/bin/activate; src/code_agent_gemini_demo.py
+
+

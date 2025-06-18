@@ -3,6 +3,7 @@ torch
 transformers
 smolagents[litellm]
 smolagents[transformers]
+smolagents[openai]
 requests
 markdownify
 duckduckgo-search
