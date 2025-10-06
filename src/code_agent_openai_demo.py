@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
 
+from demo_utils import getenv
+api_key = getenv("OPENAI_API_KEY")
+
+if not api_key:
+    raise Exception("OPENAI_API_KEY needs to be set in .env.")
+
+
 from smolagents import CodeAgent
 from smolagents import DuckDuckGoSearchTool, VisitWebpageTool
 from smolagents import OpenAIServerModel
@@ -9,13 +16,9 @@ visit_webpage_tool = VisitWebpageTool()
 tools = [ search_tool, visit_webpage_tool ]
 additional_authorized_imports = []
 
-import dotenv
-import os
-dotenv.load_dotenv()
-
 model = OpenAIServerModel(model_id="gpt-4o",
                           api_base="https://api.openai.com/v1",
-                          api_key=os.getenv("OPENAI_API_KEY"),
+                          api_key=api_key),
                           )
 agent = CodeAgent(
     tools=tools,
