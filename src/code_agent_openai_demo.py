@@ -18,8 +18,8 @@ additional_authorized_imports = []
 
 model = OpenAIServerModel(model_id="gpt-4o",
                           api_base="https://api.openai.com/v1",
-                          api_key=api_key),
-)
+                          api_key=api_key,
+                          )
 agent = CodeAgent(
     tools=tools,
     model=model,
