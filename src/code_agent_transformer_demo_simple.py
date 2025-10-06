@@ -1,30 +1,32 @@
 #!/usr/bin/env python3
-
-from demo_utils import is_ollama_model_installed
-model_id_list = ["deepseek-r1:latest", "llama3.1:405b", "qwen3:8b"]
-model_id = None
-for tmp_model_id in model_id_list:
-    if is_ollama_model_installed(tmp_model_id):
-        model_id = tmp_model_id
-        break
-if not model_id:
-    raise Exception(f"None of {model_id_list} are installed in ollama.")
+from demo_utils import get_best_device
+device = get_best_device()
 
 from smolagents import CodeAgent
 from smolagents import DuckDuckGoSearchTool, VisitWebpageTool
-from smolagents import LiteLLMModel
+from smolagents import TransformersModel
 
 search_tool = DuckDuckGoSearchTool()
 visit_webpage_tool = VisitWebpageTool()
 tools = [ search_tool, visit_webpage_tool ]
 additional_authorized_imports = []
 
-model = LiteLLMModel(model_id=f"ollama_chat/{model_id}", api_base="http://127.0.0.1:11434")
+# Must be image-text-to-text
+model_id = "HuggingFaceTB/SmolVLM2-2.2B-Instruct"
+model_id = "HuggingFaceTB/SmolVLM-500M-Instruct"
+
+import torch
+torch.cuda.empty_cache()
+
+model = TransformersModel(model_id=model_id, device_map=device)
+
+from smolagents import LogLevel
 agent = CodeAgent(
     tools=tools,
     model=model,
     additional_authorized_imports=additional_authorized_imports,
-    max_steps=5
+    max_steps=5,
+    verbosity_level = LogLevel.DEBUG
 )
 
 answer = agent.run("What events are happening in Pokemon GO today?")
