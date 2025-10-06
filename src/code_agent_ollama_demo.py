@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
 
 from demo_utils import is_ollama_model_installed
-model_id = "qwen3:8b"
-if not is_ollama_model_installed(model_id):
-    raise Exception(f"{model_id} is not installed in ollama.")
+model_id_list = ["llama3.1:405b", "qwen3:8b"]
+model_id = None
+for tmp_model_id in model_id_list:
+    if is_ollama_model_installed(tmp_model_id):
+        model_id = tmp_model_id
+        break
+if not model_id:
+    raise Exception(f"None of {model_id_list} are installed in ollama.")
 
 from smolagents import CodeAgent
 from smolagents import DuckDuckGoSearchTool, VisitWebpageTool
