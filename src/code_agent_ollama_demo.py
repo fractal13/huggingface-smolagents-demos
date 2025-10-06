@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from demo_utils import is_ollama_model_installed
-model_id_list = ["deepseek-r1:latest", "llama3.1:405b", "qwen3:8b"]
+model_id_list = ["deepseek-v3.1:671b-terminus-q4_K_M", "deepseek-r1:latest", "llama3.1:405b", "qwen3:8b"]
 model_id = None
 for tmp_model_id in model_id_list:
     if is_ollama_model_installed(tmp_model_id):
